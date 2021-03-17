@@ -8,9 +8,9 @@ target("lib")
 
 target("test")
     set_kind("binary")
-    add_files("src/tests/*.cpp")
-    add_includedirs("src/include")
     add_deps("lib")
+    add_includedirs("src/include", "src/lib")
+    add_files("src/tests/*.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
