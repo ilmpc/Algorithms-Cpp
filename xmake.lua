@@ -7,10 +7,17 @@ target("lib")
     add_files("src/lib/*.cpp")
 
 target("test")
+    set_enabled(false) 
     set_kind("binary")
     add_deps("lib")
     add_includedirs("src/include", "src/lib")
     add_files("src/tests/*.cpp")
+
+target("standalone")
+    set_kind("binary")
+    add_deps("lib")
+    add_includedirs("src/lib")
+    add_files("src/standalone/*.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
