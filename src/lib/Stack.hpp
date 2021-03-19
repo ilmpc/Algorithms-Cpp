@@ -14,13 +14,9 @@ namespace Algorithms {
 
         ~Stack() { delete data; }
 
-        bool empty() {
-            return data->head == nullptr;
-        }
+        bool empty() { return data->head == nullptr; }
 
-        int size() {
-            return data->size();
-        }
+        int size() { return data->size(); }
 
         T pop() {
             if (this->empty()) {
@@ -31,9 +27,7 @@ namespace Algorithms {
             return temp;
         }
 
-        void push(T value) {
-            data->append(new Node<T>(value));
-        }
+        void push(T value) { data->insert_after(nullptr, new Node<T>(value)); }
 
         T peek() {
             if (this->empty()) {

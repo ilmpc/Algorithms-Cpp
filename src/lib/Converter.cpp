@@ -43,24 +43,6 @@ namespace Algorithms {
                 case '9':
                     output_queue->append(new Node<std::string>(token_list->head->value));
                     break;
-                case '*':
-                case '/':
-                case '+':
-                case '-':
-                    if (operator_stack->empty()
-                        && Algorithms::is_operator(token = operator_stack->peek())) {
-                        auto this_priority
-                            = Algorithms::get_operator_priority(token_list->head->value);
-                        auto that_priority = Algorithms::get_operator_priority(token);
-                        while (this_priority <= that_priority) {
-                            output_queue->append(new Node<std::string>(token));
-                            operator_stack->pop();
-                            token = operator_stack->peek();
-                            that_priority = Algorithms::get_operator_priority(token);
-                        }
-                    }
-                    operator_stack->push(token_list->head->value);
-                    break;
                 case '(':
                     operator_stack->push(token_list->head->value);
                     break;
@@ -73,6 +55,29 @@ namespace Algorithms {
                         throw std::invalid_argument("Non paired parentheses");
                     }
                     break;
+                case '*':
+                case '/':
+                case '+':
+                case '-':
+                    if (!operator_stack->empty()
+                        && Algorithms::is_operator(token = operator_stack->peek())) {
+                        auto this_priority
+                            = Algorithms::get_operator_priority(token_list->head->value);
+                        auto that_priority = Algorithms::get_operator_priority(token);
+
+                        while (this_priority <= that_priority) {
+                            output_queue->append(new Node<std::string>(token));
+                            operator_stack->pop();
+                            if (operator_stack->empty()) {
+                                break;
+                            }
+                            token = operator_stack->peek();
+                            that_priority = Algorithms::get_operator_priority(token);
+                        }
+                    }
+                    operator_stack->push(token_list->head->value);
+                    break;
+
                 default:
                     throw std::invalid_argument("No such token");
             }
