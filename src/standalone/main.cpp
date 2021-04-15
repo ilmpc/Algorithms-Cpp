@@ -1,5 +1,7 @@
 #include <iostream>
 
-#include "../lib/Converter.hpp"
+#include "../lib/lib.hpp"
 
-int main() { std::cout << Algorithms::convert_infix_postfix(std::cin) << std::endl; }
+int main() {
+    std::cout << Algorithms::hi("someone") << std::endl; 
+}
