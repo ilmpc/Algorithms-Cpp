@@ -7,7 +7,7 @@
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "command": "/home/codespace/.local/bin/xmake",
+            "command": "~/.local/bin/xmake",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -20,7 +20,7 @@
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "command": " /home/codespace/.local/bin/xmake run test",
+            "command": "~/.local/bin/xmake run test",
             "problemMatcher": [],
             "group": {
                 "kind": "test",
