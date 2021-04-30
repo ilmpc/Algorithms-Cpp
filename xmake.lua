@@ -5,20 +5,20 @@ set_languages("c++17")
 target("lib")
     set_kind("static")
     add_includedirs("src/lib")
-    add_files("src/lib/*.cpp")
+    -- add_files("src/lib/*.cpp")
 
 target("test")
     -- set_enabled(false)
     set_kind("binary")
     add_includedirs("src/lib")
-    add_files("src/lib/*.cpp")
+    -- add_files("src/lib/*.cpp")
     add_includedirs("src/include")
     add_files("src/tests/*.cpp")
 
 target("standalone")
     set_kind("binary")
     add_includedirs("src/lib")
-    add_files("src/lib/*.cpp")
+    --add_files("src/lib/*.cpp")
     add_files("src/standalone/*.cpp")
 
 --

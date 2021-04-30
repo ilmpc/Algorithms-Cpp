@@ -1,7 +1,19 @@
 #include <iostream>
 
-#include "../lib/lib.hpp"
+#include "../lib/avlTree.hpp"
+
+using namespace Algorithms;
 
 int main() {
-    // std::cout << Algorithms::hi("someone") << std::endl; 
+    auto t = new Tree<std::string>();
+    std::string input;
+    while (std::cin >> input && input != "0") {
+        t->insert(input);
+    }
+        
+    t->for_each( [] (std::string el) {
+            std::cout << el << " ";
+        }
+    );
+    std::cout << std::endl;
 }
