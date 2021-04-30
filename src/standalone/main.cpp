@@ -11,10 +11,10 @@ using namespace Algorithms;
 enum Color { white, grey, black };
 
 template <size_t N>
-using Matrix = std::array<std::array<size_t, N>, N>;
+using EdgeList = std::array<std::vector<size_t>, N>;
 
 template<size_t N>
-void dfs(size_t i, const Matrix<N> &matrix, std::array<Color, N> &color, std::vector<size_t> &sorted) {
+void dfs(size_t i, const EdgeList<N> &lists, std::array<Color, N> &color, std::vector<size_t> &sorted) {
     switch (color[i])
     {
         case black:
@@ -26,12 +26,9 @@ void dfs(size_t i, const Matrix<N> &matrix, std::array<Color, N> &color, std::ve
         case white:
             color[i] = grey;
             
-            for (size_t to = 0; to < N; to++)
+            for (auto to : lists[i])
             {
-                auto weight = matrix[i][to];
-                if(weight != 0){
-                    dfs(to, matrix, color, sorted);
-                }
+                dfs(to, lists, color, sorted);
             }
 
             color[i] = black;
@@ -40,25 +37,25 @@ void dfs(size_t i, const Matrix<N> &matrix, std::array<Color, N> &color, std::ve
 }
 
 template<size_t N>
-std::vector<size_t> sort(const Matrix<N> &matrix) {
+std::vector<size_t> sort(const EdgeList<N> &lists) {
     std::array<Color, N> color = { white };
     std::vector<size_t> sorted;
     for (size_t i = 0; i < N; i++)
     {
-       dfs(i, matrix, color, sorted);
+       dfs(i, lists, color, sorted);
     }
     std::reverse(sorted.begin(), sorted.end());
     return sorted;
 }
 
 int main() {
-    Matrix<4> matrix = {{
-        {0, 0, 0, 1},
-        {0, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 1, 1, 0}
+    EdgeList<4> lists = {{
+        {3},
+        {},
+        {1},
+        {1, 2}
     }};
-    for (auto el : sort(matrix))
+    for (auto el : sort(lists))
     {
         std::cout << el + 1 << " ";    
     }   
